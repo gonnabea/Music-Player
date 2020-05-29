@@ -3,7 +3,8 @@ status = document.getElementById("status"),
 cdImage = document.getElementById("cdImage"),
 nextBtn = document.getElementById("nextBtn"),
 preBtn = document.getElementById("preBtn"),
-musicTitle = document.getElementById("musicTitle")
+musicTitle = document.getElementById("musicTitle"),
+progressBar = document.getElementById("progressBar")
 
 /* let playList = {
     "Don't Let Me Down (Remix)" : "Musics/Don't Let Me Down (feat. Daya) (Hipst3r Edit).wav",
@@ -30,6 +31,13 @@ function handlePlay(){
     musicTitle.innerHTML = names[orderIndex];
     playBtn.innerHTML = "◼";
     nowPlaying.play();
+    progressBar.max = nowPlaying.duration;
+    setInterval(()=>{
+        progressBar.value = nowPlaying.currentTime
+    }, 1000);
+    console.log( progressBar.max)
+    console.log(nowPlaying.duration)
+    console.log(nowPlaying.currentTime)
     nowPlaying.addEventListener("ended", handleNext)
     playBtn.removeEventListener("click", handlePlay);
     playBtn.addEventListener("click", handlePause);
@@ -47,7 +55,7 @@ function handlePause(){
 function handleNext(){
     handlePause()
     orderIndex +=1;
-    if(orderIndex >=3){
+    if(orderIndex >=playList.length){
         orderIndex = 0;
     }
     console.log(orderIndex)
@@ -59,17 +67,22 @@ function handlePre(){
     handlePause()
     orderIndex -=1;
     if(orderIndex < 0){
-        orderIndex = 2;
+        orderIndex = playList.length-1;
     }
     console.log(orderIndex)
     nowPlaying = new Audio(playList[orderIndex])
     handlePlay()
 }
 
+function handleBar(){
+    nowPlaying.currentTime = progressBar.value;
+}
+
 function init(){
     playBtn.addEventListener("click", handlePlay);
     nextBtn.addEventListener("click", handleNext);
-    preBtn.addEventListener("click", handlePre)
+    preBtn.addEventListener("click", handlePre);
+    progressBar.addEventListener("change", handleBar);
 }
 
 init()
