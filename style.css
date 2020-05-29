@@ -29,6 +29,16 @@ body{
     border-radius: 100%;
 }
 
+.cd-hole{
+    position:absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-left: -116px;
+    margin-top: 10px;
+    background-color: white;
+}
+
 .status{
     background-color: #FCF6F6;
     display: flex;
@@ -36,6 +46,9 @@ body{
     align-items: center;
     border-radius: 15px 15px 0 0;
     width: 350px;
+    position:relative;
+    opacity: 0;
+    top:50px;
 }
 
 .control{
@@ -66,4 +79,26 @@ body{
 
 .btn_previous,.btn_next{
     font-size: 20px;
+}
+
+@keyframes showStatus{
+    from{
+        opacity: 0;
+        top:50px;
+    }
+    to{
+        opacity: 1;
+        top:0px;
+    }
+}
+
+@keyframes hideStatus{
+    from{
+        opacity: 1;
+        top: 0px;
+    }
+    to{
+        opacity: 0;
+        top:50px;
+    }
 }
