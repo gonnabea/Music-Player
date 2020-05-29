@@ -30,20 +30,20 @@ function handlePlay(){
     musicTitle.innerHTML = names[orderIndex];
     playBtn.innerHTML = "◼";
     nowPlaying.play();
-    console.log(nowPlaying.duration)
     progressBar.value = nowPlaying.currentTime;
-    playstatus = setInterval(() => {
-        progressBar.max = nowPlaying.duration;
+    playStatus = setInterval(() => {
         progressBar.value = nowPlaying.currentTime;
     }, 1000);
-    
+    setTimeout(()=>{
+        progressBar.max = nowPlaying.duration;
+    },1000)
     nowPlaying.addEventListener("ended", handleNext)
     playBtn.removeEventListener("click", handlePlay);
     playBtn.addEventListener("click", handlePause);
 }
 
 function handlePause(){
-    clearInterval(playstatus)
+    clearInterval(playStatus)
     status.style.animation = "hideStatus 0.3s forwards";
     cdImage.style.animationPlayState = "paused";
     playBtn.innerHTML = "▶";
