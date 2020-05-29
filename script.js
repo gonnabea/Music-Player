@@ -19,9 +19,8 @@ names = ["Don't Let Me Down (Remix)",
 "Work From Home (Remix)",
 "Shape Of You (Remix)"],
 orderIndex = 0,
-nowPlaying = new Audio(playList[orderIndex]);
-
-
+nowPlaying = new Audio(playList[orderIndex]),
+playStatus;
 console.log(playList)
 
 function handlePlay(){
@@ -31,16 +30,20 @@ function handlePlay(){
     musicTitle.innerHTML = names[orderIndex];
     playBtn.innerHTML = "◼";
     nowPlaying.play();
-    progressBar.max = nowPlaying.duration;
-    setInterval(()=>{
-        progressBar.value = nowPlaying.currentTime
+    console.log(nowPlaying.duration)
+    progressBar.value = nowPlaying.currentTime;
+    playstatus = setInterval(() => {
+        progressBar.max = nowPlaying.duration;
+        progressBar.value = nowPlaying.currentTime;
     }, 1000);
+    
     nowPlaying.addEventListener("ended", handleNext)
     playBtn.removeEventListener("click", handlePlay);
     playBtn.addEventListener("click", handlePause);
 }
 
 function handlePause(){
+    clearInterval(playstatus)
     status.style.animation = "hideStatus 0.3s forwards";
     cdImage.style.animationPlayState = "paused";
     playBtn.innerHTML = "▶";
