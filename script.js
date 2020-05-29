@@ -35,9 +35,6 @@ function handlePlay(){
     setInterval(()=>{
         progressBar.value = nowPlaying.currentTime
     }, 1000);
-    console.log( progressBar.max)
-    console.log(nowPlaying.duration)
-    console.log(nowPlaying.currentTime)
     nowPlaying.addEventListener("ended", handleNext)
     playBtn.removeEventListener("click", handlePlay);
     playBtn.addEventListener("click", handlePause);
