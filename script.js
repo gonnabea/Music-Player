@@ -4,13 +4,9 @@ cdImage = document.getElementById("cdImage"),
 nextBtn = document.getElementById("nextBtn"),
 preBtn = document.getElementById("preBtn"),
 musicTitle = document.getElementById("musicTitle"),
-progressBar = document.getElementById("progressBar")
+progressBar = document.getElementById("progressBar"),
+addForm = document.getElementById("addForm")
 
-/* let playList = {
-    "Don't Let Me Down (Remix)" : "Musics/Don't Let Me Down (feat. Daya) (Hipst3r Edit).wav",
-    "Work From Home (Remix)" : "Musics/Fifth Harmony  feat. Ty Dolla $ign - Work From Home (Dr Gobbers Edit) FINAL.mp3",
-    "Shape Of You (Remix sample)" : "Musics/Shape Of You (Marimba Remix).mp3"
-}, */
 let playList = ["Musics/Don't Let Me Down (feat. Daya) (Hipst3r Edit).wav",
 "Musics/Fifth Harmony  feat. Ty Dolla $ign - Work From Home (Dr Gobbers Edit) FINAL.mp3",
 "Musics/Ed Sheraan x P.A.F.F. x Salvatore Ganacci - Shape Of You.mp3"],
@@ -33,10 +29,10 @@ function handlePlay(){
     progressBar.value = nowPlaying.currentTime;
     playStatus = setInterval(() => {
         progressBar.value = nowPlaying.currentTime;
-    }, 1000);
-    setTimeout(()=>{
         progressBar.max = nowPlaying.duration;
-    },1000)
+    }, 1000);
+    
+    
     nowPlaying.addEventListener("ended", handleNext)
     playBtn.removeEventListener("click", handlePlay);
     playBtn.addEventListener("click", handlePause);
@@ -78,11 +74,21 @@ function handleBar(){
     nowPlaying.currentTime = progressBar.value;
 }
 
+function addMusic(e){
+    e.preventDefault()
+    const musicTitle = e.target[0].value,
+    musicURL = e.target[1].value;
+    names.push(musicTitle);
+    playList.push(musicURL);
+    alert("음악이 추가되었습니다")
+}
+
 function init(){
     playBtn.addEventListener("click", handlePlay);
     nextBtn.addEventListener("click", handleNext);
     preBtn.addEventListener("click", handlePre);
     progressBar.addEventListener("change", handleBar);
+    addForm.addEventListener("submit", addMusic)
 }
 
 init()
