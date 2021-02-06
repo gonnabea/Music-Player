@@ -81,6 +81,7 @@ function addMusic(e){
     names.push(musicTitle);
     playList.push(musicURL);
     alert("음악이 추가되었습니다")
+    
 }
 
 function init(){
